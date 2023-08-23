@@ -2,11 +2,11 @@ import java.util.Scanner;
 public class Main {
     static Scanner scanner = new Scanner(System.in);
     public static void main(String[] args) {
-        int personsN = 0;
+        int personsN;
         int sum = 0;
         String goodsList = "";
 
-        personsN = askPersonsN();
+        personsN = getPersonsN();
 
         while (true){
             Good good = addGood();
@@ -18,10 +18,8 @@ public class Main {
             goodsList += " " + good.name;
         }
         countSumPerPerson(personsN, sum, goodsList);
-
-
     }
-    public static int askPersonsN(){
+    public static int getPersonsN(){
         int personsN = 0;
         while (personsN < 2) {
             System.out.println("На скольких человек необходимо разделить счет?");
