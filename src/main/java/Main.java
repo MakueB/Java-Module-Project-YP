@@ -4,20 +4,20 @@ public class Main {
     public static void main(String[] args) {
         int personsN;
         int sum = 0;
-        String goodsList = "";
+        String ProductsList = "";
 
         personsN = getPersonsN();
 
         while (true){
-            Good good = addGood();
-            if (good.name.equalsIgnoreCase("завершить")) {
-                goodsList = goodsList.trim();
+            Product product = addProduct();
+            if (product.name.equalsIgnoreCase("завершить")) {
+                ProductsList = ProductsList.trim();
                 break;
             }
-            sum += good.price;
-            goodsList += " " + good.name;
+            sum += product.price;
+            ProductsList += " " + product.name;
         }
-        countSumPerPerson(personsN, sum, goodsList);
+        countSumPerPerson(personsN, sum, ProductsList);
     }
     public static int getPersonsN(){
         int personsN = 0;
@@ -30,15 +30,15 @@ public class Main {
         }
         return  personsN;
     }
-    public static Good addGood() {
-        Good good;
+    public static Product addProduct() {
+        Product good;
         System.out.println("Введите название товара или \"завершить\", если все товары добавлены: ");
         String name = scanner.next();
         if (name.equalsIgnoreCase("завершить"))
-            return new Good("завершить", 0);
+            return new Product("завершить", 0);
         System.out.println("Введите стоимость товара: ");
         double price = scanner.nextDouble();
-        return good = new Good(name, price);
+        return good = new Product(name, price);
     }
     public  static  double countSumPerPerson(int personsN, int sum, String goodsList){
         double res = (double) sum/personsN;
