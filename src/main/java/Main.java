@@ -54,11 +54,13 @@ public class Main {
             price = -1;
         }
     }
-    public  static  double countSumPerPerson(int personsN, int sum, String goodsList){
+    public  static  double countSumPerPerson(int personsN, int sum, String productsList){
         double res = (double) sum/personsN;
-        System.out.println("Добавленные товары:\n");
-        System.out.println(goodsList);
-        System.out.println(String.format("Каждый человек должен заплатить: %.2f " + Format.chooseRublesEnding(res), res));
+        System.out.println("\n********************************************\nДобавленные товары:\n");
+        System.out.println(productsList);
+        System.out.println(String.format("Каждый человек должен заплатить: %.2f "
+                + Format.chooseRublesEnding(res), res) +
+                "\n********************************************");
         return res;
     }
 
