@@ -1,4 +1,5 @@
 public class Product {
+    //Класс с товарами
     String name;
     double price;
 
