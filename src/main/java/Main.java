@@ -1,23 +1,20 @@
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class Main {
-    public static List<Product> productList = new ArrayList<>();
-    static Scanner scanner = new Scanner(System.in);
-
     public static void main(String[] args) {
         int personsN;
+        List<Product> productList = new ArrayList<>();
 
         personsN = getPersonsN();
-        addProduct();
+        addProduct(productList);
         countSumPerPerson(personsN, productList);
     }
-
     public static int getPersonsN() {
         int personsN = 0;
         while (personsN < 2) {
+            Scanner scanner = new Scanner(System.in);
             System.out.println("На скольких человек необходимо разделить счет?");
             if (scanner.hasNextInt()) personsN = scanner.nextInt();
             else personsN = 0;
@@ -28,15 +25,14 @@ public class Main {
         }
         return personsN;
     }
-
-    public static void addProduct() {
-        Product product;
+    public static void addProduct(List<Product> productList) {
         double price = -1;
-        String name = "";
+        String name;
+        Scanner scanner = new Scanner(System.in);
         while (true) {
             while (true) {
                 System.out.println("Введите название товара или \"завершить\", если все товары добавлены: ");
-                name = scanner.next();
+                name = scanner.nextLine();
                 if (name.equalsIgnoreCase("завершить")) {
                     if (productList.isEmpty())
                         System.out.println("Введите название хотя бы 1 товара");
@@ -48,7 +44,6 @@ public class Main {
 
             while (price < 0) {
                 System.out.println("Введите стоимость товара: ");
-                scanner.nextLine();
                 if (scanner.hasNextDouble()) {
                     price = scanner.nextDouble();
                 } else {
@@ -56,14 +51,14 @@ public class Main {
                 }
                 if (price < 0)
                     System.out.println("Стоимость должна быть не ниже 0");
+                scanner.nextLine();
             }
             productList.add(new Product(name, price));
             price = -1;
         }
     }
-
-    public static double countSumPerPerson(int personsN, @androidx.annotation.NonNull List<Product> productList) {
-        double res = -1;
+    public static void countSumPerPerson(int personsN, @androidx.annotation.NonNull List<Product> productList) {
+        double res;
         double sum = 0;
         String textSeparator = "***********************************************";
         for (int i = 0; i < productList.size(); i++) {
@@ -77,9 +72,5 @@ public class Main {
         System.out.println(String.format("\nКаждый человек должен заплатить: %.2f "
                 + Format.chooseRublesEnding(res), res) +
                 "\n" + textSeparator);
-
-        return res;
     }
-
-
 }
