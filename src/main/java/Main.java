@@ -1,9 +1,10 @@
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
-    public static double sum = 0;
-    public static String productsList = "";
+    public static List<Product> productList = new ArrayList<>();
     static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
@@ -11,7 +12,7 @@ public class Main {
 
         personsN = getPersonsN();
         addProduct();
-        countSumPerPerson(personsN, sum, productsList);
+        countSumPerPerson(personsN, productList);
     }
 
     public static int getPersonsN() {
@@ -37,14 +38,12 @@ public class Main {
                 System.out.println("Введите название товара или \"завершить\", если все товары добавлены: ");
                 name = scanner.next();
                 if (name.equalsIgnoreCase("завершить")) {
-                    if (productsList.equals(""))
+                    if (productList.isEmpty())
                         System.out.println("Введите название хотя бы 1 товара");
                     else
                         return;
-                } else {
-                    productsList += "\n" + name;
+                } else
                     break;
-                }
             }
 
             while (price < 0) {
@@ -58,18 +57,24 @@ public class Main {
                 if (price < 0)
                     System.out.println("Стоимость должна быть не ниже 0");
             }
-            product = new Product(name, price);
-            productsList = productsList.trim() + "\n";
-            sum += price;
+            name = name;
+            productList.add(new Product(name, price));
             price = -1;
         }
     }
 
-    public static double countSumPerPerson(int personsN, double sum, String productsList) {
-        double res = (double) sum / personsN;
+    public static double countSumPerPerson(int personsN, @androidx.annotation.NonNull List<Product> productList) {
+        double res = -1;
+        double sum = 0;
+        for (int i = 0; i < productList.size(); i++) {
+            sum += productList.get(i).price;
+        }
+        res = sum / personsN;
         System.out.println("\n***********************************************\nДобавленные товары:\n");
-        System.out.println(productsList);
-        System.out.println(String.format("Каждый человек должен заплатить: %.2f "
+        for (int i = 0; i < productList.size(); i++) {
+            System.out.println(productList.get(i).name);
+        }
+        System.out.println(String.format("\nКаждый человек должен заплатить: %.2f "
                 + Format.chooseRublesEnding(res), res) +
                 "\n***********************************************");
         return res;
