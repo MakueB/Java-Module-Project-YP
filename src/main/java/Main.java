@@ -1,10 +1,11 @@
-import java.util.ArrayList;
-import java.util.List;
+
 import java.util.Scanner;
+
 public class Main {
-    public static int sum = 0;
+    public static double sum = 0;
     public static String productsList = "";
     static Scanner scanner = new Scanner(System.in);
+
     public static void main(String[] args) {
         int personsN;
 
@@ -12,19 +13,21 @@ public class Main {
         addProduct();
         countSumPerPerson(personsN, sum, productsList);
     }
-    public static int getPersonsN(){
+
+    public static int getPersonsN() {
         int personsN = 0;
         while (personsN < 2) {
             System.out.println("На скольких человек необходимо разделить счет?");
-            if(scanner.hasNextInt()) personsN = scanner.nextInt();
+            if (scanner.hasNextInt()) personsN = scanner.nextInt();
             else personsN = 0;
             scanner.nextLine();
             if (personsN < 2)
                 System.out.println("Ошибка! Введите целое число больше 1\n");
-            else  break;
+            else break;
         }
-        return  personsN;
+        return personsN;
     }
+
     public static void addProduct() {
         Product product;
         double price = -1;
@@ -34,13 +37,10 @@ public class Main {
                 System.out.println("Введите название товара или \"завершить\", если все товары добавлены: ");
                 name = scanner.next();
                 if (name.equalsIgnoreCase("завершить")) {
-                    try {
-                        if (productsList.equals(""))
-                            throw new RuntimeException();
-                        return;
-                    } catch (RuntimeException e) {
+                    if (productsList.equals(""))
                         System.out.println("Введите название хотя бы 1 товара");
-                    }
+                    else
+                        return;
                 } else {
                     productsList += "\n" + name;
                     break;
@@ -50,7 +50,7 @@ public class Main {
             while (price < 0) {
                 System.out.println("Введите стоимость товара: ");
                 scanner.nextLine();
-                if (scanner.hasNextDouble()){
+                if (scanner.hasNextDouble()) {
                     price = scanner.nextDouble();
                 } else {
                     price = -1;
@@ -64,8 +64,9 @@ public class Main {
             price = -1;
         }
     }
-    public  static  double countSumPerPerson(int personsN, int sum, String productsList){
-        double res = (double) sum/personsN;
+
+    public static double countSumPerPerson(int personsN, double sum, String productsList) {
+        double res = (double) sum / personsN;
         System.out.println("\n***********************************************\nДобавленные товары:\n");
         System.out.println(productsList);
         System.out.println(String.format("Каждый человек должен заплатить: %.2f "
