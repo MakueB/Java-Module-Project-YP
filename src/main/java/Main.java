@@ -57,7 +57,6 @@ public class Main {
                 if (price < 0)
                     System.out.println("Стоимость должна быть не ниже 0");
             }
-            name = name;
             productList.add(new Product(name, price));
             price = -1;
         }
@@ -66,17 +65,19 @@ public class Main {
     public static double countSumPerPerson(int personsN, @androidx.annotation.NonNull List<Product> productList) {
         double res = -1;
         double sum = 0;
+        String textSeparator = "***********************************************";
         for (int i = 0; i < productList.size(); i++) {
             sum += productList.get(i).price;
         }
         res = sum / personsN;
-        System.out.println("\n***********************************************\nДобавленные товары:\n");
+        System.out.println("\n" + textSeparator +"\nДобавленные товары:\n");
         for (int i = 0; i < productList.size(); i++) {
             System.out.println(productList.get(i).name);
         }
         System.out.println(String.format("\nКаждый человек должен заплатить: %.2f "
                 + Format.chooseRublesEnding(res), res) +
-                "\n***********************************************");
+                "\n" + textSeparator);
+
         return res;
     }
 
