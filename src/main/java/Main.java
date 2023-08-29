@@ -57,7 +57,7 @@ public class Main {
             price = -1;
         }
     }
-    public static void countSumPerPerson(int personsN, @androidx.annotation.NonNull List<Product> productList) {
+    public static void countSumPerPerson(int personsN, List<Product> productList) {
         double res;
         double sum = 0;
         String textSeparator = "***********************************************";
