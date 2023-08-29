@@ -50,7 +50,7 @@ public class Main {
                     price = -1;
                 }
                 if (price < 0)
-                    System.out.println("Стоимость должна быть не ниже 0");
+                    System.out.println("Ошибка! Стоимость - число не ниже 0");
                 scanner.nextLine();
             }
             productList.add(new Product(name, price));
